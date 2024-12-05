@@ -1,0 +1,951 @@
+// converted by version 1.3
+// on Wed Dec 04 21:37:26 ICT 2024
+
+.package BOT {
+	.aid 0x11:0x22:0x33:0x44:0x55;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.2;		//javacard/framework
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x2 1.2;		//javacard/security
+		0xA0:0x0:0x0:0x0:0x62:0x2:0x1 1.2;		//javacardx/crypto
+	}
+
+	.applet {
+		0x11:0x22:0x33:0x44:0x55:0x0 RSAApplet;
+		0x11:0x22:0x33:0x44:0x55:0x1 botcard;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef short RSAApplet/signLength;
+		// 1
+		instanceFieldRef 1.15 RSAApplet/rsaSign;
+		// 2
+		instanceFieldRef 1.8 RSAApplet/rsaPriKey;
+		// 3
+		instanceFieldRef 1.9 RSAApplet/rsaPubKey;
+		// 4
+		instanceFieldRef short botcard/loginStatus;
+		// 5
+		staticMethodRef 1.15.0(BZ)Ljavacard/security/Signature;;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+			.descriptor	Ljavacard/security/Signature;	1.15;
+
+		// 6
+		classRef RSAApplet;
+		// 7
+		staticMethodRef 1.13.0(BSZ)Ljavacard/security/Key;;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+			.descriptor	Ljavacard/security/Key;	1.0;
+
+		// 8
+		classRef 1.8;		// javacard/security/RSAPrivateKey
+		// 9
+		virtualMethodRef 0.3.2([BSB)V;		// javacard/framework/Applet.register([BSB)V
+		// 10
+		classRef 1.9;		// javacard/security/RSAPublicKey
+		// 11
+		staticMethodRef 0.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 12
+		classRef 1.16;		// javacard/security/KeyPair
+		// 13
+		staticMethodRef 1.16.0(BS)V;		// javacard/security/KeyPair.<init>(BS)V
+		// 14
+		virtualMethodRef 1.16.1()V;		// javacard/security/KeyPair.genKeyPair()V
+		// 15
+		virtualMethodRef 1.16.2()Ljavacard/security/PrivateKey;;		// javacard/security/KeyPair.getPrivate()Ljavacard/security/PrivateKey;
+			.descriptor	Ljavacard/security/PrivateKey;	1.2;
+
+		// 16
+		virtualMethodRef 1.16.3()Ljavacard/security/PublicKey;;		// javacard/security/KeyPair.getPublic()Ljavacard/security/PublicKey;
+			.descriptor	Ljavacard/security/PublicKey;	1.3;
+
+		// 17
+		virtualMethodRef 0.3.3()Z;		// javacard/framework/Applet.selectingApplet()Z
+		// 18
+		virtualMethodRef 0.10.1()[B;		// javacard/framework/APDU.getBuffer()[B
+		// 19
+		staticMethodRef RSAApplet/sendPublicModulus(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 20
+		staticMethodRef RSAApplet/sendPublicExponent(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 21
+		staticMethodRef RSAApplet/rsaSignature(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 22
+		staticMethodRef 0.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 23
+		virtualMethodRef 0.10.6()S;		// javacard/framework/APDU.setIncomingAndReceive()S
+		// 24
+		virtualMethodRef 0.10.8(SS)V;		// javacard/framework/APDU.setOutgoingAndSend(SS)V
+		// 25
+		staticMethodRef 0.16.1([BS[BSS)S;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+		// 26
+		virtualMethodRef 1.15.3(Ljavacard/security/Key;B)V;		// javacard/security/Signature.init(Ljavacard/security/Key;B)V
+			.descriptor	Ljavacard/security/Key;	1.0;
+
+		// 27
+		virtualMethodRef 1.15.5([BSS[BS)S;		// javacard/security/Signature.sign([BSS[BS)S
+		// 28
+		virtualMethodRef 0.10.7()S;		// javacard/framework/APDU.setOutgoing()S
+		// 29
+		virtualMethodRef 0.10.9(S)V;		// javacard/framework/APDU.setOutgoingLength(S)V
+		// 30
+		virtualMethodRef 0.10.5([BSS)V;		// javacard/framework/APDU.sendBytesLong([BSS)V
+		// 31
+		staticFieldRef byte[] botcard/PIN_INIT_VALUE;
+		// 32
+		staticMethodRef botcard/KiemTraDoDaiPIN([BSB)Z;
+		// 33
+		staticFieldRef byte[] botcard/infoImage;
+		// 34
+		staticFieldRef byte[] botcard/size;
+		// 35
+		classRef 0.9;		// javacard/framework/OwnerPIN
+		// 36
+		staticMethodRef 0.9.0(BB)V;		// javacard/framework/OwnerPIN.<init>(BB)V
+		// 37
+		staticFieldRef 0.9 botcard/pin;
+		// 38
+		virtualMethodRef 0.9.8([BSB)V;		// javacard/framework/OwnerPIN.update([BSB)V
+		// 39
+		classRef botcard;
+		// 40
+		staticMethodRef botcard/<init>()V;
+		// 41
+		virtualMethodRef 0.3.2([BSB)V;		// javacard/framework/Applet.register([BSB)V
+		// 42
+		staticMethodRef botcard/LogOut()V;
+		// 43
+		virtualMethodRef 0.3.3()Z;		// javacard/framework/Applet.selectingApplet()Z
+		// 44
+		staticMethodRef botcard/CheckFisrtUse(Ljavacard/framework/APDU;[B)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 45
+		staticMethodRef botcard/CreatePIN(Ljavacard/framework/APDU;[B)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 46
+		staticMethodRef botcard/VerifyPIN(Ljavacard/framework/APDU;[B)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 47
+		staticMethodRef botcard/ChangePIN(Ljavacard/framework/APDU;[B)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 48
+		staticMethodRef botcard/UnblockPIN(Ljavacard/framework/APDU;[B)V;
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+		// 49
+		staticMethodRef 0.16.5(BB)S;		// javacard/framework/Util.makeShort(BB)S
+		// 50
+		virtualMethodRef 0.9.2()B;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+		// 51
+		virtualMethodRef 0.9.1([BSB)Z;		// javacard/framework/OwnerPIN.check([BSB)Z
+		// 52
+		staticMethodRef RSAApplet/<init>()V;
+		// 53
+		virtualMethodRef 0.9.6()V;		// javacard/framework/OwnerPIN.resetAndUnblock()V
+		// 54
+		staticFieldRef byte[] botcard/firstLogin;
+		// 55
+		virtualMethodRef 0.10.4(SS)V;		// javacard/framework/APDU.sendBytes(SS)V
+		// 56
+		virtualMethodRef 0.9.5()V;		// javacard/framework/OwnerPIN.reset()V
+	}
+
+	.class public RSAApplet 0 extends 0.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			private 1.8 rsaPriKey 0;		// Ljavacard/security/RSAPrivateKey;
+			private 1.9 rsaPubKey 1;		// Ljavacard/security/RSAPublicKey;
+			private 1.15 rsaSign 2;		// Ljavacard/security/Signature;
+			private short signLength 3;		// S
+			private static final byte INS_SIGN = 0;		// B
+			private static final byte INS_VERIFY = 1;		// B
+		}
+
+		.publicMethodTable 7 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public static install([BSB)V 0 {
+			.stack 5;
+			.locals 0;
+
+				L0:	new 6;		// BOT/RSAApplet
+					dup;
+					invokespecial 52;		// BOT/RSAApplet.<init>()V
+					aload_0;
+					sload_1;
+					sconst_1;
+					sadd;
+					aload_0;
+					sload_1;
+					baload;
+					invokevirtual 9;		// javacard/framework/Applet.register([BSB)V
+					return;
+		}
+
+		.method private <init>()V {
+			.stack 5;
+			.locals 1;
+
+				L0:	aload_0;
+					invokespecial 11;		// javacard/framework/Applet.<init>()V
+					aload_0;
+					sspush 128;
+					putfield_s 0;		// short BOT/RSAApplet.signLength
+					aload_0;
+					bspush 10;
+					sconst_0;
+					invokestatic 5;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+					putfield_a 1;		// reference BOT/RSAApplet.rsaSign
+					aload_0;
+					sconst_5;
+					bspush 8;
+					getfield_s_this 0;		// short BOT/RSAApplet.signLength
+					smul;
+					sconst_0;
+					invokestatic 7;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 8;		// T_CLASSORINTERFACE javacard/security/RSAPrivateKey
+					putfield_a 2;		// reference BOT/RSAApplet.rsaPriKey
+					aload_0;
+					sconst_4;
+					bspush 8;
+					getfield_s_this 0;		// short BOT/RSAApplet.signLength
+					smul;
+					sconst_0;
+					invokestatic 7;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 10;		// T_CLASSORINTERFACE javacard/security/RSAPublicKey
+					putfield_a 3;		// reference BOT/RSAApplet.rsaPubKey
+					new 12;		// javacard/security/KeyPair
+					dup;
+					sconst_1;
+					bspush 8;
+					getfield_s_this 0;		// short BOT/RSAApplet.signLength
+					smul;
+					invokespecial 13;		// javacard/security/KeyPair.<init>(BS)V
+					astore_1;
+				L1:	aload_1;
+					invokevirtual 14;		// javacard/security/KeyPair.genKeyPair()V
+					aload_0;
+					aload_1;
+					invokevirtual 15;		// javacard/security/KeyPair.getPrivate()Ljavacard/security/PrivateKey;
+					checkcast 0 8;		// T_CLASSORINTERFACE javacard/security/RSAPrivateKey
+					putfield_a 2;		// reference BOT/RSAApplet.rsaPriKey
+					aload_0;
+					aload_1;
+					invokevirtual 16;		// javacard/security/KeyPair.getPublic()Ljavacard/security/PublicKey;
+					checkcast 0 10;		// T_CLASSORINTERFACE javacard/security/RSAPublicKey
+					putfield_a 3;		// reference BOT/RSAApplet.rsaPubKey
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 2;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_0;
+					invokevirtual 17;		// javacard/framework/Applet.selectingApplet()Z
+					ifeq L2;
+				L1:	return;
+				L2:	aload_1;
+					invokevirtual 18;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+				L3:	aload_2;
+					sconst_1;
+					baload;
+					stableswitch L7 0 2 L4 L5 L6;
+				L4:	aload_0;
+					aload_1;
+					invokespecial 19;		// BOT/RSAApplet.sendPublicModulus(Ljavacard/framework/APDU;)V
+					goto L8;
+				L5:	aload_0;
+					aload_1;
+					invokespecial 20;		// BOT/RSAApplet.sendPublicExponent(Ljavacard/framework/APDU;)V
+					goto L8;
+				L6:	aload_0;
+					aload_1;
+					invokespecial 21;		// BOT/RSAApplet.rsaSignature(Ljavacard/framework/APDU;)V
+					goto L8;
+				L7:	sspush 27904;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L8:	return;
+		}
+
+		.method private sendPublicExponent(Ljavacard/framework/APDU;)V {
+			.stack 3;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.setIncomingAndReceive()S
+					pop;
+					aload_1;
+					invokevirtual 18;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+				L1:	getfield_a_this 3;		// reference BOT/RSAApplet.rsaPubKey
+					aload_2;
+					sconst_0;
+					invokeinterface 3 10 4;		// javacard/security/RSAPublicKey
+					sstore_3;
+				L2:	aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 24;		// javacard/framework/APDU.setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private sendPublicModulus(Ljavacard/framework/APDU;)V {
+			.stack 3;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.setIncomingAndReceive()S
+					pop;
+					aload_1;
+					invokevirtual 18;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+				L1:	getfield_a_this 3;		// reference BOT/RSAApplet.rsaPubKey
+					aload_2;
+					sconst_0;
+					invokeinterface 3 10 5;		// javacard/security/RSAPublicKey
+					sstore_3;
+				L2:	aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 24;		// javacard/framework/APDU.setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private rsaSignature(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 18;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.setIncomingAndReceive()S
+					sstore_3;
+				L2:	sload_3;
+					newarray 11;
+					astore 4;
+				L3:	getfield_s_this 0;		// short BOT/RSAApplet.signLength
+					newarray 11;
+					astore 5;
+				L4:	aload_2;
+					sconst_5;
+					aload 4;
+					sconst_0;
+					sload_3;
+					invokestatic 25;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 1;		// reference BOT/RSAApplet.rsaSign
+					getfield_a_this 2;		// reference BOT/RSAApplet.rsaPriKey
+					sconst_1;
+					invokevirtual 26;		// javacard/security/Signature.init(Ljavacard/security/Key;B)V
+					getfield_a_this 1;		// reference BOT/RSAApplet.rsaSign
+					aload 4;
+					sconst_0;
+					aload 4;
+					arraylength;
+					aload 5;
+					sconst_0;
+					invokevirtual 27;		// javacard/security/Signature.sign([BSS[BS)S
+					pop;
+					aload_1;
+					invokevirtual 28;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					getfield_s_this 0;		// short BOT/RSAApplet.signLength
+					invokevirtual 29;		// javacard/framework/APDU.setOutgoingLength(S)V
+					aload_1;
+					aload 5;
+					sconst_0;
+					getfield_s_this 0;		// short BOT/RSAApplet.signLength
+					invokevirtual 30;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					aload_1;
+					aload 5;
+					sconst_0;
+					getfield_s_this 0;		// short BOT/RSAApplet.signLength
+					invokevirtual 30;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					return;
+		}
+
+	}
+
+	.class public botcard 1 extends 0.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			private byte[] tmpBuffer 0;		// [B
+			private 1.0[] keys 1;		// [Ljavacard/security/Key;
+			private 2.1 Cipher 2;		// Ljavacardx/crypto/Cipher;
+			private 1.20 aesKey 3;		// Ljavacard/security/AESKey;
+			private 1.16[] keyPairs 4;		// [Ljavacard/security/KeyPair;
+			private short loginStatus 5;		// S
+			public static byte[] Data 0 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};		// [B
+			public static byte lenData 1;		// B
+			public static byte[] infoID 2;		// [B
+			public static byte lenID 3;		// B
+			public static byte[] infoName 4;		// [B
+			public static byte lenName 5;		// B
+			public static byte[] infoDate 6;		// [B
+			public static byte lenDate 7;		// B
+			public static byte[] infoAddress 8;		// [B
+			public static byte lenAddress 9;		// B
+			public static byte[] infoNumberPlate 10;		// [B
+			public static byte lenNumberPlate 11;		// B
+			public static byte[] infoImage 12;		// [B
+			public static byte[] size 13;		// [B
+			static final byte CLA_BOT = -96;		// B
+			private static final byte PIN_MIN_SIZE = 4;		// B
+			private static final byte PIN_MAX_SIZE = 16;		// B
+			private static final byte[] PIN_INIT_VALUE = {66,111,116,99,97,114,100};		// [B
+			private static final byte INS_SETUP = 42;		// B
+			private static final byte INS_GEN_KEYPAIR = 48;		// B
+			private static final byte INS_CREATE_PIN = 64;		// B
+			private static final byte INS_VERIFY_PIN = 66;		// B
+			private static final byte INS_CHANGE_PIN = 68;		// B
+			private static final byte INS_UNBLOCK_PIN = 70;		// B
+			private static final byte INS_LOGOUT_ALL = 96;		// B
+			private static final byte INS_CHECK_LOGIN = 97;		// B
+			private static 0.9 pin;		// Ljavacard/framework/OwnerPIN;
+			private static 0.9 unblockin_pin;		// Ljavacard/framework/OwnerPIN;
+			private static final byte[] firstLogin = {1};		// [B
+			private static short KEY_SIZE = 32;		// S
+			private static final short SW_INVALID_PARAMETER = -25585;		// S
+			private static final short SW_IDENTITY_BLOCKED = -25588;		// S
+			private static final short SW_AUTH_FAILED = -25598;		// S
+			private static final short SW_OPERATION_NOT_ALLOWED = -25597;		// S
+			private static final short SW_INTERNAL_ERROR = -25345;		// S
+			private static final short SW_SETUP_NOT_DONE = -25596;		// S
+			private static final short SW_INCORRECT_P1 = -25584;		// S
+			private static final short SW_INCORRECT_P2 = -25583;		// S
+			private static final short SW_UNAUTHORIZED = -25594;		// S
+			private static final short SW_INCORRECT_ALG = -25591;		// S
+		}
+
+		.publicMethodTable 4 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public <init>()V 0 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 11;		// javacard/framework/Applet.<init>()V
+					return;
+		}
+
+		.method public static install([BSB)V 1 {
+			.stack 5;
+			.locals 0;
+
+				L0:	getstatic_a 31;		// reference BOT/botcard.PIN_INIT_VALUE
+					sconst_0;
+					getstatic_a 31;		// reference BOT/botcard.PIN_INIT_VALUE
+					arraylength;
+					s2b;
+					invokestatic 32;		// BOT/botcard.KiemTraDoDaiPIN([BSB)Z
+					ifne L2;
+				L1:	sspush -25345;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	sspush 10000;
+					newarray 11;
+					putstatic_a 33;		// reference BOT/botcard.infoImage
+					bspush 7;
+					newarray 11;
+					putstatic_a 34;		// reference BOT/botcard.size
+					new 35;		// javacard/framework/OwnerPIN
+					dup;
+					sconst_3;
+					getstatic_a 31;		// reference BOT/botcard.PIN_INIT_VALUE
+					arraylength;
+					s2b;
+					invokespecial 36;		// javacard/framework/OwnerPIN.<init>(BB)V
+					putstatic_a 37;		// reference BOT/botcard.pin
+					getstatic_a 37;		// reference BOT/botcard.pin
+					getstatic_a 31;		// reference BOT/botcard.PIN_INIT_VALUE
+					sconst_0;
+					getstatic_a 31;		// reference BOT/botcard.PIN_INIT_VALUE
+					arraylength;
+					s2b;
+					invokevirtual 38;		// javacard/framework/OwnerPIN.update([BSB)V
+					new 39;		// BOT/botcard
+					dup;
+					invokespecial 40;		// BOT/botcard.<init>()V
+					aload_0;
+					sload_1;
+					sconst_1;
+					sadd;
+					aload_0;
+					sload_1;
+					baload;
+					invokevirtual 41;		// javacard/framework/Applet.register([BSB)V
+					return;
+		}
+
+		.method public select()Z 6 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 42;		// BOT/botcard.LogOut()V
+					sconst_1;
+					sreturn;
+		}
+
+		.method public deselect()V 4 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 42;		// BOT/botcard.LogOut()V
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 3;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 18;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+				L1:	aload_0;
+					invokevirtual 43;		// javacard/framework/Applet.selectingApplet()Z
+					ifeq L3;
+				L2:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 44;		// BOT/botcard.CheckFisrtUse(Ljavacard/framework/APDU;[B)V
+					sspush -28672;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	aload_2;
+					sconst_0;
+					baload;
+					ifne L6;
+				L4:	aload_2;
+					sconst_1;
+					baload;
+					bspush -92;
+					if_scmpne L6;
+				L5:	return;
+				L6:	aload_2;
+					sconst_1;
+					baload;
+					stableswitch L11 64 70 L7 L11 L8 L11 L9 L11 L10;
+				L7:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 45;		// BOT/botcard.CreatePIN(Ljavacard/framework/APDU;[B)V
+					goto L12;
+				L8:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 46;		// BOT/botcard.VerifyPIN(Ljavacard/framework/APDU;[B)V
+					goto L12;
+				L9:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 47;		// BOT/botcard.ChangePIN(Ljavacard/framework/APDU;[B)V
+					goto L12;
+				L10:	aload_0;
+					aload_1;
+					aload_2;
+					invokespecial 48;		// BOT/botcard.UnblockPIN(Ljavacard/framework/APDU;[B)V
+					goto L12;
+				L11:	sspush 27904;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L12:	return;
+		}
+
+		.method private CreatePIN(Ljavacard/framework/APDU;[B)V {
+			.stack 4;
+			.locals 3;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_2;
+					sconst_3;
+					baload;
+					sstore_3;
+				L1:	sconst_0;
+					aload_2;
+					sconst_4;
+					baload;
+					invokestatic 49;		// javacard/framework/Util.makeShort(BB)S
+					sstore 4;
+				L2:	sload 4;
+					aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.setIncomingAndReceive()S
+					if_scmpeq L4;
+				L3:	sspush 26368;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	sload 4;
+					sconst_2;
+					if_scmpge L6;
+				L5:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	aload_2;
+					sconst_5;
+					baload;
+					sstore 5;
+				L7:	sload 4;
+					sconst_1;
+					sload 5;
+					sadd;
+					if_scmpge L9;
+				L8:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L9:	aload_2;
+					bspush 6;
+					sload 5;
+					invokestatic 32;		// BOT/botcard.KiemTraDoDaiPIN([BSB)Z
+					ifne L11;
+				L10:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L11:	new 35;		// javacard/framework/OwnerPIN
+					dup;
+					sload_3;
+					bspush 16;
+					invokespecial 36;		// javacard/framework/OwnerPIN.<init>(BB)V
+					putstatic_a 37;		// reference BOT/botcard.pin
+					getstatic_a 37;		// reference BOT/botcard.pin
+					aload_2;
+					bspush 6;
+					sload 5;
+					invokevirtual 38;		// javacard/framework/OwnerPIN.update([BSB)V
+					return;
+		}
+
+		.method private VerifyPIN(Ljavacard/framework/APDU;[B)V {
+			.stack 4;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	getstatic_a 37;		// reference BOT/botcard.pin
+					ifnonnull L2;
+				L1:	sspush -25584;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_2;
+					sconst_3;
+					baload;
+					ifeq L4;
+				L3:	sspush -25583;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	sconst_0;
+					aload_2;
+					sconst_4;
+					baload;
+					invokestatic 49;		// javacard/framework/Util.makeShort(BB)S
+					sstore_3;
+				L5:	sload_3;
+					aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.setIncomingAndReceive()S
+					if_scmpeq L7;
+				L6:	sspush 26368;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L7:	aload_2;
+					sconst_5;
+					sload_3;
+					s2b;
+					invokestatic 32;		// BOT/botcard.KiemTraDoDaiPIN([BSB)Z
+					ifne L9;
+				L8:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L9:	getstatic_a 37;		// reference BOT/botcard.pin
+					invokevirtual 50;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+					ifne L11;
+				L10:	sspush -25588;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L11:	getstatic_a 37;		// reference BOT/botcard.pin
+					aload_2;
+					sconst_5;
+					sload_3;
+					s2b;
+					invokevirtual 51;		// javacard/framework/OwnerPIN.check([BSB)Z
+					ifne L13;
+				L12:	aload_0;
+					invokespecial 42;		// BOT/botcard.LogOut()V
+					sspush -25598;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L13:	aload_0;
+					bspush 16;
+					putfield_s 4;		// short BOT/botcard.loginStatus
+					return;
+		}
+
+		.method private ChangePIN(Ljavacard/framework/APDU;[B)V {
+			.stack 4;
+			.locals 3;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	getstatic_a 37;		// reference BOT/botcard.pin
+					ifnonnull L2;
+				L1:	sspush -25584;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_2;
+					sconst_3;
+					baload;
+					ifeq L4;
+				L3:	sspush -25583;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	sconst_0;
+					aload_2;
+					sconst_4;
+					baload;
+					invokestatic 49;		// javacard/framework/Util.makeShort(BB)S
+					sstore_3;
+				L5:	aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.setIncomingAndReceive()S
+					sload_3;
+					if_scmpeq L7;
+				L6:	sspush 26368;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L7:	sload_3;
+					sconst_4;
+					if_scmpge L9;
+				L8:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L9:	aload_2;
+					sconst_5;
+					baload;
+					sstore 4;
+				L10:	sload_3;
+					sconst_1;
+					sload 4;
+					sadd;
+					if_scmpge L12;
+				L11:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L12:	aload_2;
+					bspush 6;
+					sload 4;
+					invokestatic 32;		// BOT/botcard.KiemTraDoDaiPIN([BSB)Z
+					ifne L14;
+				L13:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L14:	aload_2;
+					bspush 6;
+					sload 4;
+					sadd;
+					baload;
+					sstore 5;
+				L15:	sload_3;
+					sconst_1;
+					sload 4;
+					sadd;
+					sload 5;
+					sadd;
+					if_scmpge L17;
+				L16:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L17:	aload_2;
+					bspush 6;
+					sload 4;
+					sadd;
+					sconst_1;
+					sadd;
+					sload 5;
+					invokestatic 32;		// BOT/botcard.KiemTraDoDaiPIN([BSB)Z
+					ifne L19;
+				L18:	sspush -25585;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L19:	getstatic_a 37;		// reference BOT/botcard.pin
+					invokevirtual 50;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+					ifne L21;
+				L20:	sspush -25588;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L21:	getstatic_a 37;		// reference BOT/botcard.pin
+					aload_2;
+					bspush 6;
+					sload 4;
+					invokevirtual 51;		// javacard/framework/OwnerPIN.check([BSB)Z
+					ifne L23;
+				L22:	aload_0;
+					invokespecial 42;		// BOT/botcard.LogOut()V
+					sspush -25598;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L23:	getstatic_a 37;		// reference BOT/botcard.pin
+					aload_2;
+					bspush 6;
+					sload 4;
+					sadd;
+					sconst_1;
+					sadd;
+					sload 5;
+					invokevirtual 38;		// javacard/framework/OwnerPIN.update([BSB)V
+					aload_0;
+					bspush 16;
+					putfield_s 4;		// short BOT/botcard.loginStatus
+					return;
+		}
+
+		.method private UnblockPIN(Ljavacard/framework/APDU;[B)V {
+			.stack 3;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	getstatic_a 37;		// reference BOT/botcard.pin
+					ifnonnull L2;
+				L1:	sspush -25584;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	getstatic_a 37;		// reference BOT/botcard.pin
+					invokevirtual 50;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+					ifeq L4;
+				L3:	sspush -25597;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	aload_2;
+					sconst_3;
+					baload;
+					ifeq L6;
+				L5:	sspush -25583;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	sconst_0;
+					aload_2;
+					sconst_4;
+					baload;
+					invokestatic 49;		// javacard/framework/Util.makeShort(BB)S
+					sstore_3;
+				L7:	sload_3;
+					aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.setIncomingAndReceive()S
+					if_scmpeq L9;
+				L8:	sspush 26368;
+					invokestatic 22;		// javacard/framework/ISOException.throwIt(S)V
+				L9:	getstatic_a 37;		// reference BOT/botcard.pin
+					invokevirtual 53;		// javacard/framework/OwnerPIN.resetAndUnblock()V
+					return;
+		}
+
+		.method private static KiemTraDoDaiPIN([BSB)Z {
+			.stack 2;
+			.locals 0;
+
+				L0:	sload_2;
+					sconst_4;
+					if_scmplt L2;
+				L1:	sload_2;
+					bspush 16;
+					if_scmple L3;
+				L2:	sconst_0;
+					sreturn;
+				L3:	sconst_1;
+					sreturn;
+		}
+
+		.method private CheckFisrtUse(Ljavacard/framework/APDU;[B)V {
+			.stack 5;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 28;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sconst_1;
+					invokevirtual 29;		// javacard/framework/APDU.setOutgoingLength(S)V
+					getstatic_a 54;		// reference BOT/botcard.firstLogin
+					sconst_0;
+					aload_2;
+					sconst_0;
+					sconst_1;
+					invokestatic 25;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 55;		// javacard/framework/APDU.sendBytes(SS)V
+					return;
+		}
+
+		.method private CheckLogin(Ljavacard/framework/APDU;[B)V {
+			.stack 5;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_1;
+					invokevirtual 28;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sconst_1;
+					invokevirtual 29;		// javacard/framework/APDU.setOutgoingLength(S)V
+					sconst_1;
+					newarray 11;
+					dup;
+					sconst_0;
+					getfield_s_this 4;		// short BOT/botcard.loginStatus
+					s2b;
+					bastore;
+					astore_3;
+				L1:	aload_3;
+					sconst_0;
+					aload_2;
+					sconst_0;
+					sconst_1;
+					invokestatic 25;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 55;		// javacard/framework/APDU.sendBytes(SS)V
+					return;
+		}
+
+		.method private LogOut()V {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sconst_0;
+					putfield_s 4;		// short BOT/botcard.loginStatus
+					getstatic_a 37;		// reference BOT/botcard.pin
+					invokevirtual 56;		// javacard/framework/OwnerPIN.reset()V
+					return;
+		}
+
+	}
+
+}
