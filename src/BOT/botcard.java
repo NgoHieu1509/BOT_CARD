@@ -56,6 +56,7 @@ public class botcard extends Applet
 	// PIN management
 	private static OwnerPIN pin; // PIN hien tai
 	private static OwnerPIN unblockin_pin;
+	private boolean setupDone = false;
 	
 	private byte[] tmpBuffer;
 	/** ghi trang thai dang nhap*/
@@ -130,6 +131,9 @@ public class botcard extends Applet
 
 		switch (buf[ISO7816.OFFSET_INS])
 		{
+		case INS_SETUP:
+			setup(apdu,buf);
+			break;
 		case INS_CREATE_PIN:
 			CreatePIN(apdu,buf);
 			break;
@@ -146,6 +150,17 @@ public class botcard extends Applet
 			ISOException.throwIt(ISO7816.SW_INS_NOT_SUPPORTED);
 		}
 	}
+	
+	private void setup(APDU apdu, byte[] buffer) {
+		try {
+			tmpBuffer = JCSystem.makeTransientByteArray((short) 256, JCSystem.CLEAR_ON_DESELECT);
+		} catch (SystemException e) {
+			tmpBuffer = new byte[(short) 256];
+		}
+		firstLogin[0] = (byte)0x00;
+		setupDone = true;
+	}
+	
 	private void CreatePIN(APDU apdu, byte[] buffer) {
 		byte num_tries = buffer[ISO7816.OFFSET_P2];
 		/* Kiem tra dang nhap */

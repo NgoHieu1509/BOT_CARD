@@ -3,6 +3,8 @@
 <PKG name="BOT" aid="11 22 33 44 55" major="1" minor="0">
 <APPLET aid="11 22 33 44 55 00" instanceaid="" parameter="" authority="" privileges="" index="-30936" name="RSAApplet"/>
 <APPLET aid="11 22 33 44 55 01" instanceaid="" parameter="" authority="" privileges="" index="4264" name="botcard"/>
+<CLASS name="Sha512"/>
+<CLASS name="HMacSHA512"/>
 </PKG>
 <Libs/>
 </USER>
