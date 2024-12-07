@@ -16,8 +16,6 @@ import javacard.security.RSAPublicKey;
 
 public class botcard extends Applet
 {
-	// Class byte cho ung dung
-	final static byte CLA_BOT = (byte) 0xA0;
 
 	// Cau hinh PIN
 	private final static byte PIN_MIN_SIZE = (byte) 4; // Kich thuoc PIN toi thieu
@@ -25,23 +23,22 @@ public class botcard extends Applet
 	private final static byte[] PIN_INIT_VALUE = {
 		(byte) 'B', (byte) 'o', (byte) 't', 
 		(byte) 'c', (byte) 'a', (byte) 'r', (byte) 'd'};
-//thong tin nguoi dung
+		
+	//thong tin nguoi dung
 	public static byte[] Data = new byte[256];
 	public static byte lenData = (byte)0;
 	
-	public static byte[] infoID;
-	public static byte lenID = (byte)0;
 	public static byte[] infoName;
-	public static byte lenName = (byte)0;
-	public static byte[] infoDate;
-	public static byte lenDate= (byte)0;
+	public static short lenName = 0;
+	public static byte[] infoDob;
+	public static short lenDob = 0;
 	public static byte[] infoAddress;
-	public static byte lenAddress= (byte)0;
+	public static short lenAddress= 0;
 	public static byte[] infoNumberPlate;
-	public static byte lenNumberPlate= (byte)0;
+	public static short lenNumberPlate= 0;
 	public static byte[] infoImage,size;
 	
-	// Byte lenh cho cac thao tac khac nhau
+	// Byte lenh INS cho cac thao tac khac nhau
 	private final static byte INS_SETUP = (byte) 0x2A; // Lenh cau hinh
 	private final static byte INS_GEN_KEYPAIR = (byte) 0x30; // Lenh tao cap khoa
 	private final static byte INS_CREATE_PIN = (byte) 0x40; // Lenh tao PIN
@@ -49,10 +46,24 @@ public class botcard extends Applet
 	private final static byte INS_CHANGE_PIN = (byte) 0x44; // Lenh doi PIN
 	private final static byte INS_UNBLOCK_PIN = (byte) 0x46; // Lenh mo khoa PIN
 
-	// Lenh dang xuat va kiem tra dang nhap
+	// Lenh INS dang xuat va kiem tra dang nhap
 	private final static byte INS_LOGOUT_ALL = (byte) 0x60; // Dang xuat tat ca
 	private final static byte INS_CHECK_LOGIN = (byte) 0x61; // Kiem tra dang nhap
-
+	
+	/////////////////////////////////////////////////
+	// APDU data test Huy,2002,HN,12V1-12345
+	// 4875792C323030322C484E2C313256312D3132333435
+	////////////////////////////////////////////////////
+	// Lenh INS cho get / set data
+	private final static byte INS_SET_DATA = 0x01;
+	private final static byte INS_GET_DATA = 0x02;
+	
+	// P1 - INS_GET
+	private final static byte P1_GET_NAME = 0x01;
+	private final static byte P1_GET_DOB = 0x02;
+	private final static byte P1_GET_ADDRESS = 0x03;
+	private final static byte P1_GET_NUMBER_PLATE = 0x04;
+	
 	// PIN management
 	private static OwnerPIN pin; // PIN hien tai
 	private static OwnerPIN unblockin_pin;
@@ -100,6 +111,18 @@ public class botcard extends Applet
 	{
 		if (!KiemTraDoDaiPIN(PIN_INIT_VALUE, (short) 0, (byte) PIN_INIT_VALUE.length))
 		    ISOException.throwIt(SW_INTERNAL_ERROR);
+		    
+		// Initialize these arrays here
+		infoName = new byte[30];
+		infoDob = new byte[20];
+		infoAddress = new byte[20];
+		infoNumberPlate = new byte[15];
+		
+		lenAddress = 0;
+		lenName = 0;
+		lenDob = 0;
+		lenNumberPlate = 0;
+		
 		infoImage = new byte[10000];
 		size = new byte[7];
 
@@ -125,10 +148,12 @@ public class botcard extends Applet
 			CheckFisrtUse(apdu,buf);
 			ISOException.throwIt(ISO7816.SW_NO_ERROR);
 		}
-		//apdu.setIncomingAndReceive();
+		
+		apdu.setIncomingAndReceive();
+		
 		if ((buf[ISO7816.OFFSET_CLA] == 0) && (buf[ISO7816.OFFSET_INS] == (byte) 0xA4))
 			return;		
-
+		
 		switch (buf[ISO7816.OFFSET_INS])
 		{
 		case INS_SETUP:
@@ -146,17 +171,41 @@ public class botcard extends Applet
 		case INS_UNBLOCK_PIN:
 			UnblockPIN(apdu,buf);
 			break;
+		case INS_SET_DATA:
+			setData(apdu);
+			break;
+		case INS_GET_DATA:
+			short p1 = buf[ISO7816.OFFSET_P1];
+			switch(p1) {
+				case P1_GET_NAME:
+					getData(apdu, infoName, lenName);
+					break;
+				case P1_GET_DOB:
+					getData(apdu, infoDob, lenDob);
+					break;
+				case P1_GET_ADDRESS:
+					getData(apdu, infoAddress, lenAddress);
+					break;
+				case P1_GET_NUMBER_PLATE:
+					getData(apdu, infoNumberPlate, lenNumberPlate);
+					break;
+				default:
+					ISOException.throwIt(ISO7816.SW_DATA_INVALID);
+			}
+			break;
 		default:
 			ISOException.throwIt(ISO7816.SW_INS_NOT_SUPPORTED);
 		}
 	}
 	
 	private void setup(APDU apdu, byte[] buffer) {
+		/*
 		try {
 			tmpBuffer = JCSystem.makeTransientByteArray((short) 256, JCSystem.CLEAR_ON_DESELECT);
 		} catch (SystemException e) {
 			tmpBuffer = new byte[(short) 256];
 		}
+		*/
 		firstLogin[0] = (byte)0x00;
 		setupDone = true;
 	}
@@ -282,5 +331,61 @@ public class botcard extends Applet
 	private void LogOut() {
 		loginStatus  = (short) 0x0000; 
 		pin.reset();
+	}
+	
+	// Ham tim vi tri cua dau ngan cach (',' 0x2C)
+	private short findDelimiter(byte[] buffer, short offset, short dataLen, byte delimiter) {
+		for (short i = offset; i < dataLen; i++) {
+			if (buffer[i] == delimiter) {
+				return i;
+			}
+		}
+		return dataLen;
+	}
+	
+	// Set data truyen vao cac mang thong tin luu tru
+	private void setData(APDU apdu) {
+		if (!setupDone) {
+			ISOException.throwIt(SW_SETUP_NOT_DONE); // Tr li nu cha setup
+		}
+		byte[] buffer = apdu.getBuffer();
+		short dataLen = buffer[ISO7816.OFFSET_LC];
+		short curPos = 0;
+		
+		short nextDel = findDelimiter(buffer, (short)ISO7816.OFFSET_CDATA, (short)(ISO7816.OFFSET_CDATA + dataLen), (byte)',');
+		
+		lenName = (short)(nextDel - ISO7816.OFFSET_CDATA);
+		Util.arrayCopy(buffer, (short)ISO7816.OFFSET_CDATA, infoName, (short)0, lenName);
+		
+		curPos = (short) (nextDel + 1);
+		nextDel = findDelimiter(buffer, curPos, (short)(ISO7816.OFFSET_CDATA + dataLen), (byte)',');
+		
+		lenDob = (short)(nextDel - curPos);
+		Util.arrayCopy(buffer, curPos, infoDob, (short)0, lenDob);
+		
+		curPos = (short) (nextDel + 1);
+		nextDel = findDelimiter(buffer, curPos, (short)(ISO7816.OFFSET_CDATA + dataLen), (byte)',');
+		
+		lenAddress = (short)(nextDel - curPos);
+		Util.arrayCopy(buffer, curPos, infoAddress, (short)0, lenAddress);
+		
+		curPos = (short) (nextDel + 1);
+		nextDel = findDelimiter(buffer, curPos, (short)(ISO7816.OFFSET_CDATA + dataLen), (byte)',');
+		
+		lenNumberPlate = (short)(nextDel - curPos);
+		Util.arrayCopy(buffer, curPos, infoNumberPlate, (short)0, lenNumberPlate);
+	}
+	
+	// dest : Mang chua gia tri, destLength: Do dai mang
+	private void getData(APDU apdu, byte[] dest, short destLength) {
+		byte[] buffer = apdu.getBuffer();
+
+		// Thiet lap trang thai tra du lieu phan hoi
+		apdu.setOutgoing();
+		apdu.setOutgoingLength(destLength);
+
+		// Sao chep mang vao buffer
+		Util.arrayCopy(dest, (short) 0, buffer, (short) 0, destLength);
+		apdu.sendBytes((short) 0, destLength);
 	}
 }

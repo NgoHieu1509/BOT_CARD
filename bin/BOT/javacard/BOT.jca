@@ -1,5 +1,5 @@
 // converted by version 1.3
-// on Fri Dec 06 22:40:56 ICT 2024
+// on Sat Dec 07 17:34:03 ICT 2024
 
 .package BOT {
 	.aid 0x11:0x22:0x33:0x44:0x55;
@@ -29,9 +29,9 @@
 		// 4
 		instanceFieldRef boolean botcard/setupDone;
 		// 5
-		instanceFieldRef byte[] botcard/tmpBuffer;
-		// 6
 		instanceFieldRef short botcard/loginStatus;
+		// 6
+		staticMethodRef RSAApplet/<init>()V;
 		// 7
 		virtualMethodRef 1.3.2([BSB)V;		// javacard/framework/Applet.register([BSB)V
 		// 8
@@ -137,71 +137,93 @@
 		// 50
 		staticMethodRef botcard/KiemTraDoDaiPIN([BSB)Z;
 		// 51
-		staticFieldRef byte[] botcard/infoImage;
+		staticFieldRef byte[] botcard/infoName;
 		// 52
-		staticFieldRef byte[] botcard/size;
+		staticFieldRef byte[] botcard/infoDob;
 		// 53
-		classRef 1.9;		// javacard/framework/OwnerPIN
+		staticFieldRef byte[] botcard/infoAddress;
 		// 54
-		staticMethodRef 1.9.0(BB)V;		// javacard/framework/OwnerPIN.<init>(BB)V
+		staticFieldRef byte[] botcard/infoNumberPlate;
 		// 55
-		staticFieldRef 1.9 botcard/pin;
+		staticFieldRef short botcard/lenAddress;
 		// 56
-		virtualMethodRef 1.9.8([BSB)V;		// javacard/framework/OwnerPIN.update([BSB)V
+		staticFieldRef short botcard/lenName;
 		// 57
-		classRef botcard;
+		staticFieldRef short botcard/lenDob;
 		// 58
-		staticMethodRef botcard/<init>()V;
+		staticFieldRef short botcard/lenNumberPlate;
 		// 59
-		virtualMethodRef 1.3.2([BSB)V;		// javacard/framework/Applet.register([BSB)V
+		staticFieldRef byte[] botcard/infoImage;
 		// 60
-		staticMethodRef botcard/LogOut()V;
+		staticFieldRef byte[] botcard/size;
 		// 61
-		virtualMethodRef 1.3.3()Z;		// javacard/framework/Applet.selectingApplet()Z
+		classRef 1.9;		// javacard/framework/OwnerPIN
 		// 62
+		staticMethodRef 1.9.0(BB)V;		// javacard/framework/OwnerPIN.<init>(BB)V
+		// 63
+		staticFieldRef 1.9 botcard/pin;
+		// 64
+		virtualMethodRef 1.9.8([BSB)V;		// javacard/framework/OwnerPIN.update([BSB)V
+		// 65
+		classRef botcard;
+		// 66
+		staticMethodRef botcard/<init>()V;
+		// 67
+		virtualMethodRef 1.3.2([BSB)V;		// javacard/framework/Applet.register([BSB)V
+		// 68
+		staticMethodRef botcard/LogOut()V;
+		// 69
+		virtualMethodRef 1.3.3()Z;		// javacard/framework/Applet.selectingApplet()Z
+		// 70
 		staticMethodRef botcard/CheckFisrtUse(Ljavacard/framework/APDU;[B)V;
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-		// 63
+		// 71
 		staticMethodRef botcard/setup(Ljavacard/framework/APDU;[B)V;
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-		// 64
+		// 72
 		staticMethodRef botcard/CreatePIN(Ljavacard/framework/APDU;[B)V;
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-		// 65
+		// 73
 		staticMethodRef botcard/VerifyPIN(Ljavacard/framework/APDU;[B)V;
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-		// 66
+		// 74
 		staticMethodRef botcard/ChangePIN(Ljavacard/framework/APDU;[B)V;
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-		// 67
+		// 75
 		staticMethodRef botcard/UnblockPIN(Ljavacard/framework/APDU;[B)V;
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-		// 68
-		classRef 1.13;		// javacard/framework/SystemException
-		// 69
-		classRef RSAApplet;
-		// 70
-		staticFieldRef byte[] botcard/firstLogin;
-		// 71
-		staticMethodRef 1.16.5(BB)S;		// javacard/framework/Util.makeShort(BB)S
-		// 72
-		virtualMethodRef 1.9.2()B;		// javacard/framework/OwnerPIN.getTriesRemaining()B
-		// 73
-		virtualMethodRef 1.9.1([BSB)Z;		// javacard/framework/OwnerPIN.check([BSB)Z
-		// 74
-		staticMethodRef RSAApplet/<init>()V;
-		// 75
-		virtualMethodRef 1.9.6()V;		// javacard/framework/OwnerPIN.resetAndUnblock()V
 		// 76
-		virtualMethodRef 1.10.4(SS)V;		// javacard/framework/APDU.sendBytes(SS)V
+		staticMethodRef botcard/setData(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
 		// 77
+		staticMethodRef botcard/getData(Ljavacard/framework/APDU;[BS)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 78
+		staticFieldRef byte[] botcard/firstLogin;
+		// 79
+		staticMethodRef 1.16.5(BB)S;		// javacard/framework/Util.makeShort(BB)S
+		// 80
+		virtualMethodRef 1.9.2()B;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+		// 81
+		virtualMethodRef 1.9.1([BSB)Z;		// javacard/framework/OwnerPIN.check([BSB)Z
+		// 82
+		classRef RSAApplet;
+		// 83
+		virtualMethodRef 1.9.6()V;		// javacard/framework/OwnerPIN.resetAndUnblock()V
+		// 84
+		virtualMethodRef 1.10.4(SS)V;		// javacard/framework/APDU.sendBytes(SS)V
+		// 85
 		virtualMethodRef 1.9.5()V;		// javacard/framework/OwnerPIN.reset()V
+		// 86
+		staticMethodRef botcard/findDelimiter([BSSB)S;
 	}
 
 	.class public HMacSHA512 0 extends 0.0 {		// extends java/lang/Object
@@ -348,9 +370,9 @@
 			.stack 5;
 			.locals 0;
 
-				L0:	new 69;		// BOT/RSAApplet
+				L0:	new 82;		// BOT/RSAApplet
 					dup;
-					invokespecial 74;		// BOT/RSAApplet.<init>()V
+					invokespecial 6;		// BOT/RSAApplet.<init>()V
 					aload_0;
 					sload_1;
 					sconst_1;
@@ -2902,19 +2924,16 @@
 			private short loginStatus 6;		// S
 			public static byte[] Data 0 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};		// [B
 			public static byte lenData 1;		// B
-			public static byte[] infoID 2;		// [B
-			public static byte lenID 3;		// B
-			public static byte[] infoName 4;		// [B
-			public static byte lenName 5;		// B
-			public static byte[] infoDate 6;		// [B
-			public static byte lenDate 7;		// B
-			public static byte[] infoAddress 8;		// [B
-			public static byte lenAddress 9;		// B
-			public static byte[] infoNumberPlate 10;		// [B
-			public static byte lenNumberPlate 11;		// B
-			public static byte[] infoImage 12;		// [B
-			public static byte[] size 13;		// [B
-			static final byte CLA_BOT = -96;		// B
+			public static byte[] infoName 2;		// [B
+			public static short lenName 3;		// S
+			public static byte[] infoDob 4;		// [B
+			public static short lenDob 5;		// S
+			public static byte[] infoAddress 6;		// [B
+			public static short lenAddress 7;		// S
+			public static byte[] infoNumberPlate 8;		// [B
+			public static short lenNumberPlate 9;		// S
+			public static byte[] infoImage 10;		// [B
+			public static byte[] size 11;		// [B
 			private static final byte PIN_MIN_SIZE = 4;		// B
 			private static final byte PIN_MAX_SIZE = 16;		// B
 			private static final byte[] PIN_INIT_VALUE = {66,111,116,99,97,114,100};		// [B
@@ -2926,11 +2945,16 @@
 			private static final byte INS_UNBLOCK_PIN = 70;		// B
 			private static final byte INS_LOGOUT_ALL = 96;		// B
 			private static final byte INS_CHECK_LOGIN = 97;		// B
+			private static final byte INS_SET_DATA = 1;		// B
+			private static final byte INS_GET_DATA = 2;		// B
+			private static final byte P1_GET_NAME = 1;		// B
+			private static final byte P1_GET_DOB = 2;		// B
+			private static final byte P1_GET_ADDRESS = 3;		// B
+			private static final byte P1_GET_NUMBER_PLATE = 4;		// B
 			private static 1.9 pin;		// Ljavacard/framework/OwnerPIN;
 			private static 1.9 unblockin_pin;		// Ljavacard/framework/OwnerPIN;
 			private static final byte[] firstLogin = {1};		// [B
 			private static short KEY_SIZE = 32;		// S
-			private static short LENGTH_BLOCK_AES = 64;		// S
 			private static final short SW_INVALID_PARAMETER = -25585;		// S
 			private static final short SW_IDENTITY_BLOCKED = -25588;		// S
 			private static final short SW_AUTH_FAILED = -25598;		// S
@@ -2982,30 +3006,50 @@
 					ifne L2;
 				L1:	sspush -25345;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L2:	sspush 10000;
+				L2:	bspush 30;
 					newarray 11;
-					putstatic_a 51;		// reference BOT/botcard.infoImage
+					putstatic_a 51;		// reference BOT/botcard.infoName
+					bspush 20;
+					newarray 11;
+					putstatic_a 52;		// reference BOT/botcard.infoDob
+					bspush 20;
+					newarray 11;
+					putstatic_a 53;		// reference BOT/botcard.infoAddress
+					bspush 15;
+					newarray 11;
+					putstatic_a 54;		// reference BOT/botcard.infoNumberPlate
+					sconst_0;
+					putstatic_s 55;		// short BOT/botcard.lenAddress
+					sconst_0;
+					putstatic_s 56;		// short BOT/botcard.lenName
+					sconst_0;
+					putstatic_s 57;		// short BOT/botcard.lenDob
+					sconst_0;
+					putstatic_s 58;		// short BOT/botcard.lenNumberPlate
+					sspush 10000;
+					newarray 11;
+					putstatic_a 59;		// reference BOT/botcard.infoImage
 					bspush 7;
 					newarray 11;
-					putstatic_a 52;		// reference BOT/botcard.size
-					new 53;		// javacard/framework/OwnerPIN
+					putstatic_a 60;		// reference BOT/botcard.size
+					new 61;		// javacard/framework/OwnerPIN
 					dup;
 					sconst_3;
 					getstatic_a 49;		// reference BOT/botcard.PIN_INIT_VALUE
 					arraylength;
 					s2b;
-					invokespecial 54;		// javacard/framework/OwnerPIN.<init>(BB)V
-					putstatic_a 55;		// reference BOT/botcard.pin
-					getstatic_a 55;		// reference BOT/botcard.pin
+					invokespecial 62;		// javacard/framework/OwnerPIN.<init>(BB)V
+					putstatic_a 63;		// reference BOT/botcard.pin
+					getstatic_a 63;		// reference BOT/botcard.pin
 					getstatic_a 49;		// reference BOT/botcard.PIN_INIT_VALUE
 					sconst_0;
 					getstatic_a 49;		// reference BOT/botcard.PIN_INIT_VALUE
 					arraylength;
 					s2b;
-					invokevirtual 56;		// javacard/framework/OwnerPIN.update([BSB)V
-					new 57;		// BOT/botcard
+					invokevirtual 64;		// javacard/framework/OwnerPIN.update([BSB)V
+					new 65;		// BOT/botcard
 					dup;
-					invokespecial 58;		// BOT/botcard.<init>()V
+					invokespecial 66;		// BOT/botcard.<init>()V
 					aload_0;
 					sload_1;
 					sconst_1;
@@ -3013,7 +3057,7 @@
 					aload_0;
 					sload_1;
 					baload;
-					invokevirtual 59;		// javacard/framework/Applet.register([BSB)V
+					invokevirtual 67;		// javacard/framework/Applet.register([BSB)V
 					return;
 		}
 
@@ -3022,7 +3066,7 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 60;		// BOT/botcard.LogOut()V
+					invokespecial 68;		// BOT/botcard.LogOut()V
 					sconst_1;
 					sreturn;
 		}
@@ -3032,13 +3076,13 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 60;		// BOT/botcard.LogOut()V
+					invokespecial 68;		// BOT/botcard.LogOut()V
 					return;
 		}
 
 		.method public process(Ljavacard/framework/APDU;)V 7 {
-			.stack 3;
-			.locals 1;
+			.stack 4;
+			.locals 2;
 
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
@@ -3046,15 +3090,18 @@
 					invokevirtual 23;		// javacard/framework/APDU.getBuffer()[B
 					astore_2;
 				L1:	aload_0;
-					invokevirtual 61;		// javacard/framework/Applet.selectingApplet()Z
+					invokevirtual 69;		// javacard/framework/Applet.selectingApplet()Z
 					ifeq L3;
 				L2:	aload_0;
 					aload_1;
 					aload_2;
-					invokespecial 62;		// BOT/botcard.CheckFisrtUse(Ljavacard/framework/APDU;[B)V
+					invokespecial 70;		// BOT/botcard.CheckFisrtUse(Ljavacard/framework/APDU;[B)V
 					sspush -28672;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L3:	aload_2;
+				L3:	aload_1;
+					invokevirtual 27;		// javacard/framework/APDU.setIncomingAndReceive()S
+					pop;
+					aload_2;
 					sconst_0;
 					baload;
 					ifne L6;
@@ -3067,55 +3114,81 @@
 				L6:	aload_2;
 					sconst_1;
 					baload;
-					slookupswitch L12 5 42 L7 64 L8 66 L9 68 L10 70 L11;
+					slookupswitch L20 7 1 L12 2 L13 42 L7 64 L8 66 L9 68 L10 70 L11;
 				L7:	aload_0;
 					aload_1;
 					aload_2;
-					invokespecial 63;		// BOT/botcard.setup(Ljavacard/framework/APDU;[B)V
-					goto L13;
+					invokespecial 71;		// BOT/botcard.setup(Ljavacard/framework/APDU;[B)V
+					goto L21;
 				L8:	aload_0;
 					aload_1;
 					aload_2;
-					invokespecial 64;		// BOT/botcard.CreatePIN(Ljavacard/framework/APDU;[B)V
-					goto L13;
+					invokespecial 72;		// BOT/botcard.CreatePIN(Ljavacard/framework/APDU;[B)V
+					goto L21;
 				L9:	aload_0;
 					aload_1;
 					aload_2;
-					invokespecial 65;		// BOT/botcard.VerifyPIN(Ljavacard/framework/APDU;[B)V
-					goto L13;
+					invokespecial 73;		// BOT/botcard.VerifyPIN(Ljavacard/framework/APDU;[B)V
+					goto L21;
 				L10:	aload_0;
 					aload_1;
 					aload_2;
-					invokespecial 66;		// BOT/botcard.ChangePIN(Ljavacard/framework/APDU;[B)V
-					goto L13;
+					invokespecial 74;		// BOT/botcard.ChangePIN(Ljavacard/framework/APDU;[B)V
+					goto L21;
 				L11:	aload_0;
 					aload_1;
 					aload_2;
-					invokespecial 67;		// BOT/botcard.UnblockPIN(Ljavacard/framework/APDU;[B)V
-					goto L13;
-				L12:	sspush 27904;
+					invokespecial 75;		// BOT/botcard.UnblockPIN(Ljavacard/framework/APDU;[B)V
+					goto L21;
+				L12:	aload_0;
+					aload_1;
+					invokespecial 76;		// BOT/botcard.setData(Ljavacard/framework/APDU;)V
+					goto L21;
+				L13:	aload_2;
+					sconst_2;
+					baload;
+					sstore_3;
+				L14:	sload_3;
+					stableswitch L19 1 4 L15 L16 L17 L18;
+				L15:	aload_0;
+					aload_1;
+					getstatic_a 51;		// reference BOT/botcard.infoName
+					getstatic_s 56;		// short BOT/botcard.lenName
+					invokespecial 77;		// BOT/botcard.getData(Ljavacard/framework/APDU;[BS)V
+					goto L21;
+				L16:	aload_0;
+					aload_1;
+					getstatic_a 52;		// reference BOT/botcard.infoDob
+					getstatic_s 57;		// short BOT/botcard.lenDob
+					invokespecial 77;		// BOT/botcard.getData(Ljavacard/framework/APDU;[BS)V
+					goto L21;
+				L17:	aload_0;
+					aload_1;
+					getstatic_a 53;		// reference BOT/botcard.infoAddress
+					getstatic_s 55;		// short BOT/botcard.lenAddress
+					invokespecial 77;		// BOT/botcard.getData(Ljavacard/framework/APDU;[BS)V
+					goto L21;
+				L18:	aload_0;
+					aload_1;
+					getstatic_a 54;		// reference BOT/botcard.infoNumberPlate
+					getstatic_s 58;		// short BOT/botcard.lenNumberPlate
+					invokespecial 77;		// BOT/botcard.getData(Ljavacard/framework/APDU;[BS)V
+					goto L21;
+				L19:	sspush 27012;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L13:	return;
+					goto L21;
+				L20:	sspush 27904;
+					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
+				L21:	return;
 		}
 
 		.method private setup(Ljavacard/framework/APDU;[B)V {
 			.stack 3;
-			.locals 1;
+			.locals 0;
 
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-				L0:	aload_0;
-					sspush 256;
-					sconst_2;
-					invokestatic 39;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
-					putfield_a 5;		// reference BOT/botcard.tmpBuffer
-				L1:	goto L4;
-				L2:	astore_3;
-				L3:	aload_0;
-					sspush 256;
-					newarray 11;
-					putfield_a 5;		// reference BOT/botcard.tmpBuffer
-				L4:	getstatic_a 70;		// reference BOT/botcard.firstLogin
+				L0:	getstatic_a 78;		// reference BOT/botcard.firstLogin
 					sconst_0;
 					sconst_0;
 					bastore;
@@ -3123,10 +3196,6 @@
 					sconst_1;
 					putfield_b 4;		// boolean BOT/botcard.setupDone
 					return;
-			.exceptionTable {
-				// start_block end_block handler_block catch_type_index
-				L0 L1 L2 68;
-			}
 		}
 
 		.method private CreatePIN(Ljavacard/framework/APDU;[B)V {
@@ -3143,7 +3212,7 @@
 					aload_2;
 					sconst_4;
 					baload;
-					invokestatic 71;		// javacard/framework/Util.makeShort(BB)S
+					invokestatic 79;		// javacard/framework/Util.makeShort(BB)S
 					sstore 4;
 				L2:	sload 4;
 					aload_1;
@@ -3174,17 +3243,17 @@
 					ifne L11;
 				L10:	sspush -25585;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L11:	new 53;		// javacard/framework/OwnerPIN
+				L11:	new 61;		// javacard/framework/OwnerPIN
 					dup;
 					sload_3;
 					bspush 16;
-					invokespecial 54;		// javacard/framework/OwnerPIN.<init>(BB)V
-					putstatic_a 55;		// reference BOT/botcard.pin
-					getstatic_a 55;		// reference BOT/botcard.pin
+					invokespecial 62;		// javacard/framework/OwnerPIN.<init>(BB)V
+					putstatic_a 63;		// reference BOT/botcard.pin
+					getstatic_a 63;		// reference BOT/botcard.pin
 					aload_2;
 					bspush 6;
 					sload 5;
-					invokevirtual 56;		// javacard/framework/OwnerPIN.update([BSB)V
+					invokevirtual 64;		// javacard/framework/OwnerPIN.update([BSB)V
 					return;
 		}
 
@@ -3194,7 +3263,7 @@
 
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-				L0:	getstatic_a 55;		// reference BOT/botcard.pin
+				L0:	getstatic_a 63;		// reference BOT/botcard.pin
 					ifnonnull L2;
 				L1:	sspush -25584;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
@@ -3208,7 +3277,7 @@
 					aload_2;
 					sconst_4;
 					baload;
-					invokestatic 71;		// javacard/framework/Util.makeShort(BB)S
+					invokestatic 79;		// javacard/framework/Util.makeShort(BB)S
 					sstore_3;
 				L5:	sload_3;
 					aload_1;
@@ -3224,25 +3293,25 @@
 					ifne L9;
 				L8:	sspush -25585;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L9:	getstatic_a 55;		// reference BOT/botcard.pin
-					invokevirtual 72;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+				L9:	getstatic_a 63;		// reference BOT/botcard.pin
+					invokevirtual 80;		// javacard/framework/OwnerPIN.getTriesRemaining()B
 					ifne L11;
 				L10:	sspush -25588;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L11:	getstatic_a 55;		// reference BOT/botcard.pin
+				L11:	getstatic_a 63;		// reference BOT/botcard.pin
 					aload_2;
 					sconst_5;
 					sload_3;
 					s2b;
-					invokevirtual 73;		// javacard/framework/OwnerPIN.check([BSB)Z
+					invokevirtual 81;		// javacard/framework/OwnerPIN.check([BSB)Z
 					ifne L13;
 				L12:	aload_0;
-					invokespecial 60;		// BOT/botcard.LogOut()V
+					invokespecial 68;		// BOT/botcard.LogOut()V
 					sspush -25598;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
 				L13:	aload_0;
 					bspush 16;
-					putfield_s 6;		// short BOT/botcard.loginStatus
+					putfield_s 5;		// short BOT/botcard.loginStatus
 					return;
 		}
 
@@ -3252,7 +3321,7 @@
 
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-				L0:	getstatic_a 55;		// reference BOT/botcard.pin
+				L0:	getstatic_a 63;		// reference BOT/botcard.pin
 					ifnonnull L2;
 				L1:	sspush -25584;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
@@ -3266,7 +3335,7 @@
 					aload_2;
 					sconst_4;
 					baload;
-					invokestatic 71;		// javacard/framework/Util.makeShort(BB)S
+					invokestatic 79;		// javacard/framework/Util.makeShort(BB)S
 					sstore_3;
 				L5:	aload_1;
 					invokevirtual 27;		// javacard/framework/APDU.setIncomingAndReceive()S
@@ -3323,22 +3392,22 @@
 					ifne L19;
 				L18:	sspush -25585;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L19:	getstatic_a 55;		// reference BOT/botcard.pin
-					invokevirtual 72;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+				L19:	getstatic_a 63;		// reference BOT/botcard.pin
+					invokevirtual 80;		// javacard/framework/OwnerPIN.getTriesRemaining()B
 					ifne L21;
 				L20:	sspush -25588;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L21:	getstatic_a 55;		// reference BOT/botcard.pin
+				L21:	getstatic_a 63;		// reference BOT/botcard.pin
 					aload_2;
 					bspush 6;
 					sload 4;
-					invokevirtual 73;		// javacard/framework/OwnerPIN.check([BSB)Z
+					invokevirtual 81;		// javacard/framework/OwnerPIN.check([BSB)Z
 					ifne L23;
 				L22:	aload_0;
-					invokespecial 60;		// BOT/botcard.LogOut()V
+					invokespecial 68;		// BOT/botcard.LogOut()V
 					sspush -25598;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L23:	getstatic_a 55;		// reference BOT/botcard.pin
+				L23:	getstatic_a 63;		// reference BOT/botcard.pin
 					aload_2;
 					bspush 6;
 					sload 4;
@@ -3346,10 +3415,10 @@
 					sconst_1;
 					sadd;
 					sload 5;
-					invokevirtual 56;		// javacard/framework/OwnerPIN.update([BSB)V
+					invokevirtual 64;		// javacard/framework/OwnerPIN.update([BSB)V
 					aload_0;
 					bspush 16;
-					putfield_s 6;		// short BOT/botcard.loginStatus
+					putfield_s 5;		// short BOT/botcard.loginStatus
 					return;
 		}
 
@@ -3359,12 +3428,12 @@
 
 			.descriptor	Ljavacard/framework/APDU;	1.10;
 
-				L0:	getstatic_a 55;		// reference BOT/botcard.pin
+				L0:	getstatic_a 63;		// reference BOT/botcard.pin
 					ifnonnull L2;
 				L1:	sspush -25584;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L2:	getstatic_a 55;		// reference BOT/botcard.pin
-					invokevirtual 72;		// javacard/framework/OwnerPIN.getTriesRemaining()B
+				L2:	getstatic_a 63;		// reference BOT/botcard.pin
+					invokevirtual 80;		// javacard/framework/OwnerPIN.getTriesRemaining()B
 					ifeq L4;
 				L3:	sspush -25597;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
@@ -3378,7 +3447,7 @@
 					aload_2;
 					sconst_4;
 					baload;
-					invokestatic 71;		// javacard/framework/Util.makeShort(BB)S
+					invokestatic 79;		// javacard/framework/Util.makeShort(BB)S
 					sstore_3;
 				L7:	sload_3;
 					aload_1;
@@ -3386,8 +3455,8 @@
 					if_scmpeq L9;
 				L8:	sspush 26368;
 					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
-				L9:	getstatic_a 55;		// reference BOT/botcard.pin
-					invokevirtual 75;		// javacard/framework/OwnerPIN.resetAndUnblock()V
+				L9:	getstatic_a 63;		// reference BOT/botcard.pin
+					invokevirtual 83;		// javacard/framework/OwnerPIN.resetAndUnblock()V
 					return;
 		}
 
@@ -3419,7 +3488,7 @@
 					aload_1;
 					sconst_1;
 					invokevirtual 33;		// javacard/framework/APDU.setOutgoingLength(S)V
-					getstatic_a 70;		// reference BOT/botcard.firstLogin
+					getstatic_a 78;		// reference BOT/botcard.firstLogin
 					sconst_0;
 					aload_2;
 					sconst_0;
@@ -3429,7 +3498,7 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 76;		// javacard/framework/APDU.sendBytes(SS)V
+					invokevirtual 84;		// javacard/framework/APDU.sendBytes(SS)V
 					return;
 		}
 
@@ -3449,7 +3518,7 @@
 					newarray 11;
 					dup;
 					sconst_0;
-					getfield_s_this 6;		// short BOT/botcard.loginStatus
+					getfield_s_this 5;		// short BOT/botcard.loginStatus
 					s2b;
 					bastore;
 					astore_3;
@@ -3463,7 +3532,7 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 76;		// javacard/framework/APDU.sendBytes(SS)V
+					invokevirtual 84;		// javacard/framework/APDU.sendBytes(SS)V
 					return;
 		}
 
@@ -3473,9 +3542,174 @@
 
 				L0:	aload_0;
 					sconst_0;
-					putfield_s 6;		// short BOT/botcard.loginStatus
-					getstatic_a 55;		// reference BOT/botcard.pin
-					invokevirtual 77;		// javacard/framework/OwnerPIN.reset()V
+					putfield_s 5;		// short BOT/botcard.loginStatus
+					getstatic_a 63;		// reference BOT/botcard.pin
+					invokevirtual 85;		// javacard/framework/OwnerPIN.reset()V
+					return;
+		}
+
+		.method private findDelimiter([BSSB)S {
+			.stack 2;
+			.locals 1;
+
+				L0:	sload_2;
+					sstore 5;
+				L1:	sload 5;
+					sload_3;
+					if_scmpge L5;
+				L2:	aload_1;
+					sload 5;
+					baload;
+					sload 4;
+					if_scmpne L4;
+				L3:	sload 5;
+					sreturn;
+				L4:	sinc 5 1;
+					goto L1;
+				L5:	sload_3;
+					sreturn;
+		}
+
+		.method private setData(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_b_this 4;		// boolean BOT/botcard.setupDone
+					ifne L2;
+				L1:	sspush -25596;
+					invokestatic 14;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+				L3:	aload_2;
+					sconst_4;
+					baload;
+					sstore_3;
+				L4:	sconst_0;
+					sstore 4;
+				L5:	aload_0;
+					aload_2;
+					sconst_5;
+					sconst_5;
+					sload_3;
+					sadd;
+					bspush 44;
+					invokespecial 86;		// BOT/botcard.findDelimiter([BSSB)S
+					sstore 5;
+				L6:	sload 5;
+					sconst_5;
+					ssub;
+					putstatic_s 56;		// short BOT/botcard.lenName
+					aload_2;
+					sconst_5;
+					getstatic_a 51;		// reference BOT/botcard.infoName
+					sconst_0;
+					getstatic_s 56;		// short BOT/botcard.lenName
+					invokestatic 29;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 5;
+					sconst_1;
+					sadd;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload 4;
+					sconst_5;
+					sload_3;
+					sadd;
+					bspush 44;
+					invokespecial 86;		// BOT/botcard.findDelimiter([BSSB)S
+					sstore 5;
+					sload 5;
+					sload 4;
+					ssub;
+					putstatic_s 57;		// short BOT/botcard.lenDob
+					aload_2;
+					sload 4;
+					getstatic_a 52;		// reference BOT/botcard.infoDob
+					sconst_0;
+					getstatic_s 57;		// short BOT/botcard.lenDob
+					invokestatic 29;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 5;
+					sconst_1;
+					sadd;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload 4;
+					sconst_5;
+					sload_3;
+					sadd;
+					bspush 44;
+					invokespecial 86;		// BOT/botcard.findDelimiter([BSSB)S
+					sstore 5;
+					sload 5;
+					sload 4;
+					ssub;
+					putstatic_s 55;		// short BOT/botcard.lenAddress
+					aload_2;
+					sload 4;
+					getstatic_a 53;		// reference BOT/botcard.infoAddress
+					sconst_0;
+					getstatic_s 55;		// short BOT/botcard.lenAddress
+					invokestatic 29;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 5;
+					sconst_1;
+					sadd;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload 4;
+					sconst_5;
+					sload_3;
+					sadd;
+					bspush 44;
+					invokespecial 86;		// BOT/botcard.findDelimiter([BSSB)S
+					sstore 5;
+					sload 5;
+					sload 4;
+					ssub;
+					putstatic_s 58;		// short BOT/botcard.lenNumberPlate
+					aload_2;
+					sload 4;
+					getstatic_a 54;		// reference BOT/botcard.infoNumberPlate
+					sconst_0;
+					getstatic_s 58;		// short BOT/botcard.lenNumberPlate
+					invokestatic 29;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method private getData(Ljavacard/framework/APDU;[BS)V {
+			.stack 5;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 23;		// javacard/framework/APDU.getBuffer()[B
+					astore 4;
+				L1:	aload_1;
+					invokevirtual 32;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sload_3;
+					invokevirtual 33;		// javacard/framework/APDU.setOutgoingLength(S)V
+					aload_2;
+					sconst_0;
+					aload 4;
+					sconst_0;
+					sload_3;
+					invokestatic 29;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 84;		// javacard/framework/APDU.sendBytes(SS)V
 					return;
 		}
 
